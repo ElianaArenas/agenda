@@ -3,13 +3,11 @@ const { connection } = require('../connection');
 const createAgenda =  async (req, res) => {
   try {
     const { nombre, correo, tlf_fijo, tlf_movil } = req.body;
-
     const sql = `INSERT INTO la_agenda (nombre, correo, tlf_fijo, tlf_movil)
                  VALUES (:nombre, :correo, :tlf_fijo, :tlf_fijo);`;
-
     const options = {
       replacements: {
-        nombre, correo, tlf_fijo, tlf_movil
+        nombre: nombre, correo: correo, tlf_fijo:tlf_fijo , tlf_movil: tlf_movil
       }
     }
   
@@ -23,10 +21,15 @@ const createAgenda =  async (req, res) => {
 
 const getAgenda = async (req, res) => {
   try {
-    const { id } = req.params;
-    const sql = `SELECT * FROM la_agenda WHERE id = ${id};`;
-    const [agenda]  = await connection.query(sql);
+    const { nombre } = req.params;
+    const sql = `SELECT * FROM la_agenda WHERE nombre = :nombre;`;
 
+    const options = {
+      replacements: {
+        nombre: nombre
+      }
+    }
+    const [agenda]  = await connection.query(sql, options);
     res.status(200).json({ agenda });
   } catch (error) {
     res.status(500).json({ ok: false, error: error.message });

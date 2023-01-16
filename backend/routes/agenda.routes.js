@@ -13,8 +13,10 @@ router.route('/')
       .get(getAgendas);
 
 router.route('/:id')
-      .get(getAgenda)
       .put(updateAgenda)
       .delete(deleteAgenda);
+
+router.route('/:nombre')
+      .get(getAgenda)
 
 module.exports = router;
