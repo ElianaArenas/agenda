@@ -15,6 +15,12 @@ const initDB = async ()=>{
       tlf_movil CHAR(10),
       PRIMARY KEY(id)
       );`);
+      await connection.query(`INSERT INTO la_agenda (nombre, correo, tlf_fijo, tlf_movil)
+       VALUES ('Maria Daniela', 'daniela@gmail.com', '1234567', '3456788');`);
+      await connection.query(`INSERT INTO la_agenda (nombre, correo, tlf_fijo, tlf_movil)
+       VALUES ('Juan', 'juan@gmail.com', '31245566', '5667788');`);
+      await connection.query(`INSERT INTO la_agenda (nombre, correo, tlf_fijo, tlf_movil)
+       VALUES ('Luis', 'luis@gmail.com', '13234555', '4356778');`);
   } catch (error) {
     console.log(error);
   }
